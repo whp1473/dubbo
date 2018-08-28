@@ -1,7 +1,19 @@
 language: java
-jdk:
-    - oraclejdk8
-    - oraclejdk7
-    - openjdk6
+sudo: false # faster builds
 
-script: mvn -DskipTests=true clean package
+jdk:
+  - oraclejdk10
+  - oraclejdk9
+  - oraclejdk8
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+
+install: true
+
+script:
+  - travis_wait 30 ./mvnw clean package -DskipTests=false -Dcheckstyle.skip=true -Drat.skip=true -Dmaven.javadoc.skip=true
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
