@@ -32,6 +32,7 @@ public class ClusterUtils {
     }
 
     public static URL mergeUrl(URL remoteUrl, Map<String, String> localMap) {
+        //[@王厚平]决定使用提供者配置，还是使用消费者配置.
         Map<String, String> map = new HashMap<String, String>();
         Map<String, String> remoteMap = remoteUrl.getParameters();
 
